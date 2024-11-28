@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-multipart
+opencv-python
+numpy
+pillow
+python-jose
+passlib
+bcrypt
+pydantic
