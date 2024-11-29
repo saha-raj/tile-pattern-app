@@ -18,7 +18,11 @@ logging.basicConfig(level=logging.DEBUG)
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Update this for production as needed
+    # allow_origins=["http://localhost:3000"],  # Update this for production as needed
+    allow_origins=[
+        "http://localhost:3000",
+        "*"  # Temporarily allow all origins while testing
+    ]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
