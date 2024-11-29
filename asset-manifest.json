@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tile-pattern-app/static/css/main.a2e46673.css",
-    "main.js": "/tile-pattern-app/static/js/main.1bac9dd1.js",
+    "main.js": "/tile-pattern-app/static/js/main.6855808c.js",
     "static/js/453.8ab44547.chunk.js": "/tile-pattern-app/static/js/453.8ab44547.chunk.js",
     "index.html": "/tile-pattern-app/index.html",
     "main.a2e46673.css.map": "/tile-pattern-app/static/css/main.a2e46673.css.map",
-    "main.1bac9dd1.js.map": "/tile-pattern-app/static/js/main.1bac9dd1.js.map",
+    "main.6855808c.js.map": "/tile-pattern-app/static/js/main.6855808c.js.map",
     "453.8ab44547.chunk.js.map": "/tile-pattern-app/static/js/453.8ab44547.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a2e46673.css",
-    "static/js/main.1bac9dd1.js"
+    "static/js/main.6855808c.js"
   ]
 }
