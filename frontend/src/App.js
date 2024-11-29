@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ImageUpload from './components/ImageUpload';
+import InfoContent from './components/InfoContent';
 import './App.css';
 
 const DEFAULT_PARAMS = {
@@ -66,8 +67,11 @@ function App() {
       thicknessArray.forEach(t => formData.append("thicknesses", t));
 
       console.log("API URL:", process.env.REACT_APP_API_URL);
-      const response = await axios.post("http://localhost:8000/process-image/", formData);
-      // const response = await axios.post(`${process.env.REACT_APP_API_URL}/process-image/`, formData);
+
+      // const response = await axios.post("http://localhost:8000/process-image/", formData);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/process-image/`, formData);
+
+
       setImages(prev => ({
         ...prev,
         processed: `data:image/png;base64,${response.data.image}`,
@@ -78,7 +82,7 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className={`app-container ${images.original ? 'with-image' : 'no-image'}`}>
       <div className="control-panel">
         <h2>Parameters</h2>
         
@@ -94,7 +98,7 @@ function App() {
         </div>
 
         <div className="parameter-group">
-          <label className="parameter-label">Number of Colors</label>
+          <label className="parameter-label">Number of Colors (1-30)</label>
           <input
             type="number"
             name="nColors"
@@ -160,15 +164,23 @@ function App() {
         </div>
       </div>
 
-      <div className="image-container">
-        <h2>Original Image</h2>
-        {images.original && <img src={images.original} alt="Original" />}
-      </div>
+      {!images.original ? (
+        <div className="image-container">
+          <InfoContent />
+        </div>
+      ) : (
+        <>
+          <div className="image-container">
+            <h2>Original Image</h2>
+            <img src={images.original} alt="Original" />
+          </div>
 
-      <div className="image-container">
-        <h2>Tiled Image</h2>
-        {images.processed && <img src={images.processed} alt="Tiled" />}
-      </div>
+          <div className="image-container">
+            <h2>Tiled Image</h2>
+            {images.processed && <img src={images.processed} alt="Processed" />}
+          </div>
+        </>
+      )}
     </div>
   );
 }
