@@ -39,7 +39,7 @@ html, body {
 .control-panel h2, .image-container h2 {
   margin-bottom: 20px;
   color: #415a77;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: 'Share Tech Mono', 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Roboto Mono', monospace;
 }
 
 .parameter-group {
@@ -52,7 +52,7 @@ html, body {
   margin-bottom: 8px;
   font-weight: bold;
   color: #555;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: 'Share Tech Mono', 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Roboto Mono', monospace;
 }
 
 .parameter-input {
@@ -62,8 +62,7 @@ html, body {
   border: 1px solid #ddd;
   border-radius: 4px;
   margin-bottom: 10px;
-  font-family: 'Share Tech Mono', monospace;
-  /* margin-right: 10px; */
+  font-family: 'Share Tech Mono', 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Roboto Mono', monospace;
 }
 
 .button-group {
@@ -135,7 +134,7 @@ html, body {
 }
 
 .info-content h1 {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: 'Share Tech Mono', 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Roboto Mono', monospace;
   margin-bottom: 20px;
   color: #415a77;
   margin-top: 10px;
@@ -143,7 +142,7 @@ html, body {
 }
 
 .info-content h2 {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: 'Share Tech Mono', 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Roboto Mono', monospace;
   margin-top: 30px;
   margin-bottom: 15px;
   color: #415a77;
