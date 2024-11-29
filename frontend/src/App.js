@@ -7,12 +7,23 @@ const DEFAULT_PARAMS = {
   nTiles: 12,
   nColors: 6,
   tileSize: 32,
-  thicknesses: "[2, 4, 6, 8]",
+  thicknesses: "[2, 4, 6]",
   sequentialColors: false,
-  colors: ["#0081a7","#00afb9","#fdfcdc","#fed9b7","#f07167",
-            "#006d8f","#0095a3","#00c3cf","#fcf7c4","#ffe4d4",
-            "#f85c51","#005f7a","#00848c","#ffeeb3","#ffcfb5"],
+  colors: [
+              "#0081a7", "#00afb9", "#fdfcdc", "#fed9b7", "#f07167",
+              "#006d8f", "#0095a3", "#00c3cf", "#fcf7c4", "#ffe4d4",
+              "#f85c51", "#005f7a", "#00848c", "#ffeeb3", "#ffcfb5",
+              // Adding 15 more in same style:
+              "#00b8c7", "#00a4b3", "#ffedbb", "#ffc7a3", "#ff8f7d",
+              "#007a99", "#00ccd6", "#fff3e0", "#ffbea1", "#ff7c6a",
+              "#008fa6", "#00d9e3", "#fff7d8", "#ffb699", "#ff6957"
+          ],
 };
+
+// original palette:
+// colors: ["#0081a7","#00afb9","#fdfcdc","#fed9b7","#f07167",
+//   "#006d8f","#0095a3","#00c3cf","#fcf7c4","#ffe4d4",
+//   "#f85c51","#005f7a","#00848c","#ffeeb3","#ffcfb5"]
 
 function App() {
   const [params, setParams] = useState(DEFAULT_PARAMS);
@@ -54,8 +65,9 @@ function App() {
       const thicknessArray = JSON.parse(params.thicknesses);
       thicknessArray.forEach(t => formData.append("thicknesses", t));
 
-      // const response = await axios.post("http://localhost:8000/process-image/", formData);
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/process-image/`, formData);
+      console.log("API URL:", process.env.REACT_APP_API_URL);
+      const response = await axios.post("http://localhost:8000/process-image/", formData);
+      // const response = await axios.post(`${process.env.REACT_APP_API_URL}/process-image/`, formData);
       setImages(prev => ({
         ...prev,
         processed: `data:image/png;base64,${response.data.image}`,
@@ -93,28 +105,6 @@ function App() {
         </div>
 
         <div className="parameter-group">
-          <label className="parameter-label">Tile Size</label>
-          <input
-            type="number"
-            name="tileSize"
-            value={params.tileSize}
-            onChange={handleParamChange}
-            className="parameter-input"
-          />
-        </div>
-
-        <div className="parameter-group">
-          <label className="parameter-label">Thicknesses</label>
-          <input
-            type="text"
-            name="thicknesses"
-            value={params.thicknesses}
-            onChange={handleParamChange}
-            className="parameter-input"
-          />
-        </div>
-
-        <div className="parameter-group">
           <label className="parameter-label">
             <input
               type="checkbox"
@@ -125,6 +115,30 @@ function App() {
             Sequential Colors
           </label>
         </div>
+        
+        <div className="parameter-group">
+          <label className="parameter-label">Tile Size (px)</label>
+          <input
+            type="number"
+            name="tileSize"
+            value={params.tileSize}
+            onChange={handleParamChange}
+            className="parameter-input"
+          />
+        </div>
+
+        <div className="parameter-group">
+          <label className="parameter-label">Thicknesses (px)</label>
+          <input
+            type="text"
+            name="thicknesses"
+            value={params.thicknesses}
+            onChange={handleParamChange}
+            className="parameter-input"
+          />
+        </div>
+
+        
 
         <ImageUpload 
           onImageUpload={(file) => {
@@ -141,7 +155,7 @@ function App() {
             Reset
           </button>
           <button onClick={handleSubmit} className="button submit-button">
-            Submit
+            Generate!
           </button>
         </div>
       </div>
@@ -152,8 +166,8 @@ function App() {
       </div>
 
       <div className="image-container">
-        <h2>Processed Image</h2>
-        {images.processed && <img src={images.processed} alt="Processed" />}
+        <h2>Tiled Image</h2>
+        {images.processed && <img src={images.processed} alt="Tiled" />}
       </div>
     </div>
   );
