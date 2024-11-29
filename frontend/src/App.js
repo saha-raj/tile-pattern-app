@@ -21,11 +21,6 @@ const DEFAULT_PARAMS = {
           ],
 };
 
-// original palette:
-// colors: ["#0081a7","#00afb9","#fdfcdc","#fed9b7","#f07167",
-//   "#006d8f","#0095a3","#00c3cf","#fcf7c4","#ffe4d4",
-//   "#f85c51","#005f7a","#00848c","#ffeeb3","#ffcfb5"]
-
 function App() {
   const [params, setParams] = useState(DEFAULT_PARAMS);
   const [images, setImages] = useState({
@@ -33,6 +28,7 @@ function App() {
     processed: null,
   });
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleParamChange = (e) => {
     const { name, value, type } = e.target;
@@ -53,6 +49,7 @@ function App() {
     }
 
     try {
+      setIsProcessing(true);
       const formData = new FormData();
       formData.append("file", selectedFile);
       formData.append("n_colors", parseInt(params.nColors));
@@ -66,20 +63,25 @@ function App() {
       const thicknessArray = JSON.parse(params.thicknesses);
       thicknessArray.forEach(t => formData.append("thicknesses", t));
 
-      console.log("API URL:", process.env.REACT_APP_API_URL);
-
+      // Make sure we're using localhost for local development
       // const response = await axios.post("http://localhost:8000/process-image/", formData);
+      
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/process-image/`, formData);
-
-
+      
+      console.log("Response received:", response);  // Add this line
+      
       setImages(prev => ({
         ...prev,
         processed: `data:image/png;base64,${response.data.image}`,
       }));
     } catch (error) {
-      console.error("Error details:", error);
+      console.error("Full error:", error);
+      console.error("Error response:", error.response);  // Add this line
+      alert("Error processing image. Check console for details.");  // Add this line
+    } finally {
+      setIsProcessing(false);
     }
-  };
+};
 
   return (
     <div className={`app-container ${images.original ? 'with-image' : 'no-image'}`}>
@@ -142,8 +144,6 @@ function App() {
           />
         </div>
 
-        
-
         <ImageUpload 
           onImageUpload={(file) => {
             setSelectedFile(file);
@@ -177,7 +177,14 @@ function App() {
 
           <div className="image-container">
             <h2>Tiled Image</h2>
-            {images.processed && <img src={images.processed} alt="Processed" />}
+            {isProcessing ? (
+              <div className="loading-spinner">
+                <div className="spinner"></div>
+                <p>Tiling image...</p>
+              </div>
+            ) : (
+              images.processed && <img src={images.processed} alt="Processed" />
+            )}
           </div>
         </>
       )}
