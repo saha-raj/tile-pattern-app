@@ -15,6 +15,10 @@ app = FastAPI()
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
+@app.get("/test")
+def test():
+    return {"status": "API is running"}
+
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
