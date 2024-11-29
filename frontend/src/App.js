@@ -54,7 +54,8 @@ function App() {
       const thicknessArray = JSON.parse(params.thicknesses);
       thicknessArray.forEach(t => formData.append("thicknesses", t));
 
-      const response = await axios.post("http://localhost:8000/process-image/", formData);
+      // const response = await axios.post("http://localhost:8000/process-image/", formData);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/process-image/`, formData);
       setImages(prev => ({
         ...prev,
         processed: `data:image/png;base64,${response.data.image}`,
