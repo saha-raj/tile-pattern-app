@@ -16,7 +16,7 @@ html, body {
 
 /* Grid layout when no image is selected */
 .app-container.no-image {
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 260px 0.5fr;
 }
 
 /* Grid layout when image is selected */
@@ -131,6 +131,9 @@ html, body {
 .info-content {
   /* padding: 20px; */
   margin-left: 20px;
+  font-family: 'Lato', sans-serif;
+  color: #595959;
+  
 }
 
 .info-content h1 {
@@ -148,7 +151,59 @@ html, body {
   color: #415a77;
 }
 
-.info-content p {
+.info-content p, .info-content li {
   margin-bottom: 15px;
-  line-height: 1.6;
+  line-height: 1.4;
+  font-size: 1.2rem;
+  color: #595959
+}
+
+.info-content a {
+    color: #3a86ff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.info-content a:hover {
+    color: #f72585;
+    text-decoration: none;
+}
+
+.info-content a:focus {
+    outline: 2px solid #f72585;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.info-content a:visited {
+  outline: 2px solid #3a86ff;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* spinner */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #43aa8b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+  font-family: 'Share Tech Mono', 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Roboto Mono', monospace;
+
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

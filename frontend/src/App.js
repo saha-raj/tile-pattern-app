@@ -5,10 +5,10 @@ import InfoContent from './components/InfoContent';
 import './App.css';
 
 const DEFAULT_PARAMS = {
-  nTiles: 12,
+  nTiles: 8,
   nColors: 6,
-  tileSize: 32,
-  thicknesses: "[2, 4, 6]",
+  tileSize: 20,
+  thicknesses: "[2, 4]",
   sequentialColors: false,
   colors: [
               "#0081a7", "#00afb9", "#fdfcdc", "#fed9b7", "#f07167",
